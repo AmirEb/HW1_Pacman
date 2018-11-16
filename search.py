@@ -110,6 +110,37 @@ def depthFirstSearch(problem):
 
     return result
 
+
+
+def breadthFirstSearch(problem):
+    """Search the shallowest nodes in the search tree first."""
+    "*** YOUR CODE HERE ***"
+    stack = util.Queue()
+    result=[]
+    currentNode = problem.getStartState()
+    "It takes the start location and places it in this variable"
+    stack.push((currentNode, []))
+    reviewed = set()
+    "set is a collection without any duplicate element "
+
+    assistant = util.Queue()
+    assistant.push(currentNode)
+
+    while not stack.isEmpty():
+
+        currentNode, result = stack.pop()
+        if problem.isGoalState(currentNode):
+            break
+        reviewed.add(currentNode)
+        for successor, action, stepCost in problem.getSuccessors(currentNode):
+            "Each node has these three variables"
+
+            if(not successor in assistant.list and not successor in reviewed):
+                assistant.push(successor)
+                stack.push((successor, result  + [action]))
+
+    return result
+
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"

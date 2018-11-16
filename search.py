@@ -87,7 +87,28 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+        currentNode = problem.getStartState()
+    "It takes the start location and places it in this variable"
+    result=[]
+    stack = util.Stack()
+
+    stack.push((currentNode, []))
+    reviewed = set()
+    "set is a collection without any duplicate element "
+
+    while not stack.isEmpty():
+
+        currentNode , result = stack.pop()
+        reviewed.add(currentNode )
+        if problem.isGoalState(currentNode ):
+            break
+
+        for othernode, action, cost in problem.getSuccessors(currentNode ):
+            "Each node has these three variables"
+            if not othernode in reviewed:
+                stack.push((othernode, result  + [action]))
+
+    return result
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
